@@ -14,21 +14,32 @@ public class FeedbackServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		 response.setContentType("text/html");
+		String enrollmentNumber = request.getParameter("enrollmentNumber");
+        String fullName = request.getParameter("fullName");
+        String password = request.getParameter("password");
+        String confirmPassword = request.getParameter("confirmPassword");
+        String semester = request.getParameter("semester");
+        String division = request.getParameter("division");
+        String subjectName = request.getParameter("subjectName");
+        String facultyName = request.getParameter("facultyName");
+        String feedbackDescription = request.getParameter("feedbackDescription");
 
-	        PrintWriter out = response.getWriter();
-	        out.println("<html><head><title>Feedback Details</title></head><body>");
+        // Perform server-side password validation
+        if (!password.equals(confirmPassword)) {
+            response.getWriter().println("Password and Confirm Password must be the same.");
+            return;
+        }
 
-	        out.println("<h2>Feedback Details:</h2>");
-	        out.println("<p>Enrollment Number: " + request.getParameter("enrollmentNumber") + "</p>");
-	        out.println("<p>Full Name: " + request.getParameter("fullName") + "</p>");
-	        out.println("<p>Semester: " + request.getParameter("semester") + "</p>");
-	        out.println("<p>Division: " + request.getParameter("division") + "</p>");
-	        out.println("<p>Subject Name: " + request.getParameter("subjectName") + "</p>");
-	        out.println("<p>Faculty Name: " + request.getParameter("facultyName") + "</p>");
-	        out.println("<p>Feedback Description: " + request.getParameter("feedbackDescription") + "</p>");
 
-	        out.println("</body></html>");
-	}
-
+        // Display form details in the browser
+        response.setContentType("text/html");
+        response.getWriter().println("<h2>Student Feedback Details</h2>");
+        response.getWriter().println("<p>Enrollment Number: " + enrollmentNumber + "</p>");
+        response.getWriter().println("<p>Full Name: " + fullName + "</p>");
+        response.getWriter().println("<p>Semester: " + semester + "</p>");
+        response.getWriter().println("<p>Division: " + division + "</p>");
+        response.getWriter().println("<p>Subject Name: " + subjectName + "</p>");
+        response.getWriter().println("<p>Faculty Name: " + facultyName + "</p>");
+        response.getWriter().println("<p>Feedback Description: " + feedbackDescription + "</p>");
+    }
 }
