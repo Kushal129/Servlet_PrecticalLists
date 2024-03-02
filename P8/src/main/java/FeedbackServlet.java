@@ -24,14 +24,11 @@ public class FeedbackServlet extends HttpServlet {
         String facultyName = request.getParameter("facultyName");
         String feedbackDescription = request.getParameter("feedbackDescription");
 
-        // Perform server-side password validation
         if (!password.equals(confirmPassword)) {
             response.getWriter().println("Password and Confirm Password must be the same.");
             return;
         }
 
-
-        // Display form details in the browser
         response.setContentType("text/html");
         response.getWriter().println("<h2>Student Feedback Details</h2>");
         response.getWriter().println("<p>Enrollment Number: " + enrollmentNumber + "</p>");
